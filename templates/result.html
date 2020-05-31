@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Title Page-->
+    <title>Result</title>
+
+    <!-- Icons font CSS-->
+    <link href="static/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    
+    <!-- Main CSS-->
+    <link href="static/css/main.css" rel="stylesheet" media="all">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+    <style>
+        .card-3 {
+            color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .side {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+        }
+        #search {
+            color: white;
+        }
+
+        .disease-name li {
+            color: black;
+        }
+
+        .loader {
+            border: 7px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 7px solid #3498db;
+            width: 30px;
+            height: 30px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+            position: center;
+        }
+        /* Safari */
+        @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="side">
+                   <div class="uploaded-image">
+                        <img src={{imagepath}} height="200px" width="200px"><br>
+                    </div>
+                    <div class="probability">
+                        <h2>Probabilities</h2>
+                        {%for i in range(0, len)%} 
+                         <span>{{disease[i]}}</span><br>
+                         <span>{{prob[i]}}%</span> <br>
+                        {%endfor%}
+
+                    </div>
+                </div>
+                <div class="side">
+                    <div class="question">
+                        ASK A QUESTION.....
+                        <form method="POST">
+                            <div class="input-group">
+                                <input class="input--style-3" type="text" placeholder="Question" name="question">
+                            </div>
+                            <div class="input-group disease-name">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select name="disease">
+                                        <option disabled="disabled" selected="selected">Select disease</option>
+                                        <option>{{disease[0]}}</option>
+                                        <option>{{disease[1]}}</option>
+                                        <option>{{disease[2]}}</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                            <div class="p-t-10">
+                                <button id="submitques" class="btn btn--pill btn--green" type="submit">Submit</button>
+                                <button id="nearby" class="btn btn--pill btn--green" type="submit">near by doctors</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="answer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="static/vendor/select2/select2.min.js"></script>
+    <script src="static/vendor/datepicker/moment.min.js"></script>
+    <!-- Main JS-->
+    <script src="static/js/global.js"></script>
+
+</body>
+<script>
+$('#submitques').on('click', function(e) {
+    e.preventDefault();
+    console.log(1);
+    var question = $('input[name="question"]').val();
+    var disease = $('select[name="disease"]').find(":selected").text();
+    if (question.length == 0) {
+        return alert('Enter valid question!');
+    }
+    var loader = $('<div class="loader"></div>');
+    $(".answer").html(loader);
+    $.ajax({
+        method: "POST",
+        url: "/getanswer",
+        data: JSON.stringify({ question: question, disease: disease }),
+        contentType: 'application/json',
+        complete: function(response) {
+            console.log(response);
+            $('.loader').hide();
+            $(".answer").html('<p>'+response.responseText+'</p>');
+        }
+    });
+});
+
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else { 
+//     x.innerHTML = "Geolocation is not supported by this browser.";
+//   }
+// }
+// function showPosition(position) {
+//   console.log(position.coords.latitude) 
+//   console.log(position.coords.longitude)
+//   $.ajax({
+//         method: "POST",
+//         url: "/near-by-doctors",
+//         data: JSON.stringify({ latitude: position.coords.latitude,longitude: position.coords.longitude}),
+//         contentType: 'application/json',
+//         complete: function(response) {
+//             console.log(response);
+//             $('.loader').hide();
+//             $(".answer").html('<p>'+response.responseText+'</p>');
+//         }
+//     })
+// }
+
+
+$('#nearby').on('click', function(e) {
+    console.log(1);
+    e.preventDefault();
+    if (!navigator.geolocation) {
+        return alret("Geolocation is not supported by this browser.");
+    }
+    else {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            window.location.href = '/near-by-doctors?lat='+lat+'&long='+long;
+
+            // $.ajax({
+            //     method: "POST",
+            //     url: "/near-by-doctors",
+            //     data: JSON.stringify({ latitude: position.coords.latitude,longitude: position.coords.longitude}),
+            //     contentType: 'application/json',
+            // });
+        });
+    }
+});
+
+</script>
+</html>
+<!-- end document-->
+

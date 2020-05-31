@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Title Page-->
+    <title>Result</title>
+
+    <!-- Icons font CSS-->
+    <link href="static/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    
+    <!-- Main CSS-->
+    <link href="static/css/main.css" rel="stylesheet" media="all">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+    <style>
+        .card-3 {
+            color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .side {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+        }
+        #search {
+            color: white;
+        }
+
+        .disease-name li {
+            color: black;
+        }
+        #near-by-names {
+            font-size: 20px;
+        }
+        #details {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div id="details"><h1>Near by Hospital Names</h1>
+                    {%for i in range(0, length)%} 
+                         <div id = "near-by-names">{{i+1}}.{{names[i]}}</div><div id="location">({{address[i]}})</div><br>
+                    {%endfor%}
+                </div na>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="static/vendor/select2/select2.min.js"></script>
+    <script src="static/vendor/datepicker/moment.min.js"></script>
+    <script src="static/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="static/js/global.js"></script>
+    <script src="static/js/index.js"></script>
+
+</body>
+</html>
+<!-- end document-->
+

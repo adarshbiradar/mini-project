@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title Page-->
+    <title>Info Form</title>
+
+    <!-- Icons font CSS-->
+    <link href="static/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="static/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="static/css/main.css" rel="stylesheet" media="all">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Information Form</h2>
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Name" name="name">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="number" placeholder="Age" name="age">
+                        </div>
+                        <div class="input-group">
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="gender">
+                                    <option disabled="disabled" selected="selected">Gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+			     <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="type">
+                                    <option disabled="disabled" selected="selected">Type</option>
+                                    <option>Histo</option>
+                                    <option>Follow up</option>
+                                    <option>Consensus</option>
+				    <option>Confocal</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+			    <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="localization">
+                                    <option disabled="disabled" selected="selected">Localization</option>
+                                    <option>Back</option>
+                                    <option>Trunk</option>
+                                    <option>Lower extremity</option>
+                                    <option>Upper extremity</option>
+                                    <option>Abdomen</option>
+                                    <option>Face</option>
+                                    <option>Scalp</option>
+                                    <option>Ear</option>
+                                    <option>Chest</option>
+                                    <option>Genital</option>
+                                    <option>Neck</option>
+                                    <option>Hand</option>
+                                    <option>Foot</option>
+                                    <option>Acral</option>
+                                    <option>Unknown</option>
+				                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+  			<label class='input--style-3' for="myfile">Select a Image:</label>
+  			<input class='input--style-3' type="file" id="myfile" name="myfile" value="Upload"><br><br>
+                        <div class="p-t-10">
+                            <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="static/vendor/select2/select2.min.js"></script>
+    <script src="static/vendor/datepicker/moment.min.js"></script>
+    <script src="static/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="static/js/global.js"></script>
+
+</body>
+</html>
+<!-- end document-->
