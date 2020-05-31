@@ -156,7 +156,7 @@ def get_nearby():
     longitude = request.args.get('long')
 
     print("In nearby doctors")
-    API_KEY = "AIzaSyBBQoqVFpbRC3B3pEzvuzWKLGTqywMJcHI"
+    API_KEY = "API_KEY"
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+str(latitude)+"%2C"+str(longitude)+"&radius=100000&keyword=dermatologist+near+me&fields=formatted_address,name,rating,opening_hours&key="+API_KEY
 
     details = requests.get(url)
